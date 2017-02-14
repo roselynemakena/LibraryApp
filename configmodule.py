@@ -1,6 +1,6 @@
 class Config(object):
-	DEBUG = False
-
+    DEBUG = False
+    SECRET_KEY = 'caFGG!eg%$$@SEGf'
 
 class ProductionConfig(Config):
     DEBUG = False

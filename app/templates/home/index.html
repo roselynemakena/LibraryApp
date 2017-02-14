@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+
+{% block title%}
+
+
+{% endblock title %}
+
+{% block body %}
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                <ul>
+                    <h1>Super Library</h1>
+                    <h3>Know where your books are!</h3>
+                    <hr class="intro-divider">
+                    </ul>
+                </div>
+                <div class="jumbotron" style="">
+                  <h1 class="display-3">Welcome to Super Library!</h1>
+                      <p class="lead"> Register your books, manage them and charge those who have not reurned them! <i class="glyphicon glyphicon-star"></i></p>
+                      <hr class="my-4">
+                      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                      <div class="pull-right col-md-6 col-md-offset-6">
+                      <div class="lead col-md-3" >
+                        <a class="btn btn-sm btn-success btn-lg" href="/admin" role="button">Admin</a>
+                      </div>
+                        <div class="lead col-md-3">
+                        <a class="btn btn-sm btn-info btn-lg" href="/login" role="button">User</a>
+                      </div>
+                      </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body%}

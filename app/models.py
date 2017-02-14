@@ -50,7 +50,7 @@ class Book(db.Model):
 	book_title = db.Column(db.String(100))
 	book_description = db.Column(db.String(500))
 	created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
-	users = db.relationship('User', backref='book', lazy='dynamic')
+	# users = db.relationship('User', backref='book', lazy='dynamic')
 
 	def __repr__():
 		return 'Book: {}'.format(self.book_title)

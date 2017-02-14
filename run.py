@@ -6,9 +6,9 @@ import os
 config_name = os.getenv('FLASK_CONFIG')
 app = create_app(config_name)
 
-@app.route('/')
-def index():
-	return "hi"
+# @app.route('/')
+# def index():
+# 	return "hi"
 
 
 
