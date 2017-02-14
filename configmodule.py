@@ -10,6 +10,9 @@ class DevelopmentConfig(Config):
     DEBUG = True
     MAKENA = "roselyne"
     SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = 'postgresql://admin:root@localhost/library'
+
 
 class TestingConfig(Config):
     TESTING = True
@@ -17,4 +20,5 @@ class TestingConfig(Config):
 app_config = {
 	'development' : DevelopmentConfig,
 	'production': ProductionConfig
+
 }
