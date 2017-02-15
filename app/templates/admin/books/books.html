@@ -16,6 +16,8 @@
                         <h4 class="card-title">{{ book.title }}</h4>
                         <p class="card-text">{{ book.description }}</p>
                       </div>
+                  {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
                       <div class="card-footer">
                         <small class="text-muted" class="btn btn-xs">
                                <a href="{{ url_for('admin.edit_book', id=book.id) }}">
@@ -28,6 +30,9 @@
                                    </a>
                         </small>
                       </div>
+                    {% endif %}
+                  {% endif %}
+
                     </div>
                   </div>
                   <!-- check if user is admin -->
