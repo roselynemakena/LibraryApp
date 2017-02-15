@@ -1,6 +1,10 @@
-from flask import render_template, abort
+from flask import render_template, abort, request,flash
 from flask_login import login_required, current_user
+from sqlalchemy import and_
 from . import home
+from ..models import UserBook, Book
+from .. import db
+
 
 
 
@@ -27,6 +31,63 @@ def dashboard():
 	'''
 	return render_template('home/dashboard.html', title="Dashboard")
 @home.route('/allbooks')
-def allbooks():
+def books():
 	return render_template('home/allbooks.html', title="All Books")
+
+@home.route('/borrow_book', methods=['POST'])
+def borrow_books():
+	# Save borrowed book
+	add_user_book = True
+	user_id = current_user.id
+	book_id = request.form['book_id']
+	books = get_user_borrowed_books(user_id)
+	no_of_books = books.count()
+
+	if book_id:
+		return render_template('home/borrowed_books.html', books = books, title="Borrow Books")
+
+
+	for x in books:
+		print("**********************")
+		print(Book.query.get(2))
+	# raise
+	# user_book = UserBook(book_id = request.args.get('id') ,user_id = request.args.get('user_id'))
+	user_book = UserBook(user_id = user_id, book_id = book_id)
+	try:
+		if book_is_borrowed(user_id, book_id):
+			#check if owner has book already
+			flash("You have already Borrowed this Book, Please return it first :)")
+		else:		
+			#go ahead and allow user to borrow book
+			db.session.add(user_book)
+			db.session.commit()
+			flash("Successfully Borrowed book, wait for approval from admin")
+
+	except:
+		flash("You have borrowed this book already!")
+		
+
+	return render_template('home/borrowed_books.html', books = books, title="Borrow Books")
+
+@home.route('/borrowed_books', methods = ['GET', 'POST'])
+@login_required
+def list_borrowed_books():
+	user_id = current_user.id
+
+	books = UserBook.query.get(user_id)
+	print(books)
+	print("*************************")
+
+	return render_template('home/borrowed_books.html',  books = books, title="Borrowed Books")
+	
+
+
+def book_is_borrowed(user_id, book_id):
+	return UserBook.query.filter(UserBook.user_id==user_id).filter(UserBook.book_id==book_id).first()
+
+def get_user_borrowed_books(user_id):
+	# return UserBook.query.join(Book, UserBook.books_id==books.id).filter(UserBook.user_id==request.form['user_id'])
+	return Book.query.join(UserBook, Book.id==UserBook.book_id).filter(UserBook.user_id==request.form['user_id'])
+	
+
 	

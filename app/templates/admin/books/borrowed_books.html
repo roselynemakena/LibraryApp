@@ -1,0 +1,55 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Borrowed Bookss{% endblock %}
+{% block body %}
+  
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">All Users</h1>
+        <div class=" container">
+          {% if current_user.is_authenticated %}
+                  {% if current_user.is_admin %}
+                      <button class="btn btn-default"><a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></button>
+                    {% else %}
+
+                 <button class="btn btn-default"><a href="{{ url_for('home.dashboard') }}"><< Return to Dashboard</a></li></button>
+                  {% endif %}
+          {% endif %}
+        </div>
+        {% if users %}
+          <div class="container">
+          <table class="table table-striped">
+					  <div class="panel-heading">All Users</div>
+					  	<th>Username</th>
+					  	<th>Email</th>
+					  	<th>Books borrowed</th>
+
+              {% for user in users %}
+						<tr>
+						<td>{{user.username}}</td>
+						<td>{{user.email}}</td>
+						<td>
+							<form action="{{ url_for('admin.user_books')}}" method="POST">
+								<input type="hidden" name="user_id" value="{{user.id}}">
+								<input type="submit" value="Check Borrowed Books" class="btn btn-xs btn-info">
+							</form>
+						</td>
+						</tr>	
+
+              {% endfor %}
+				</div>
+
+              </table>
+              </div
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3 class="lead"> No Books have been added. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+      
+        </div>
+        </div>
+        </div>
+{% endblock %}

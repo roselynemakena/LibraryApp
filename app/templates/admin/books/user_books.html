@@ -6,7 +6,7 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Books</h1>
+        <h1 style="text-align:center;">Books for <i class="glyphicon glyphicon-user"></i>{{user.username}}</h1>
         <div class=" container">
           {% if current_user.is_authenticated %}
                   {% if current_user.is_admin %}
@@ -25,18 +25,15 @@
                       <div class="card-block">
                         <h4 class="card-title">{{ book.title }}</h4>
                         <p class="card-text">{{ book.description }}</p>
+                        <hr>
+                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Date Due: </small>
                       </div>
                   {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
                       <div class="card-footer">
-                        <button   class="btn btn-xs btn-info">
-                               <a href="{{ url_for('admin.edit_book', id=book.id) }}">
-                                 <i class="fa fa-pencil"></i> Edit 
-                              </a>
-                        </button>
-                        <button class="btn btn-xs btn-success">
+                        <button class="btn btn-xs btn-info">
                                    <a href="{{ url_for('admin.delete_book', id=book.id) }}">
-                                    <i class="fa fa-trash"></i> Delete 
+                                    <i class="glyphicon glyphicon-flash"></i> Collect Book
                                    </a>
                         </button>
                       </div>
@@ -57,7 +54,7 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3 class="lead"> No Books have been added. </h3>
+            <h3 class="lead"> No Books borrowed by this user. </h3>
             <hr class="intro-divider">
         {% endif %}
       

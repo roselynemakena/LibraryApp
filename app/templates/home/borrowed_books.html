@@ -1,0 +1,40 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Bookss{% endblock %}
+{% block body %}
+  
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Books you currently have</h1>
+        {% if books %}
+          <div class="container">
+              {% for book in books %}
+                  <div class="card-deck">
+                    <div class="card col-md-3 card-f">
+                      <div class="card-block">
+                        <h4 class="card-title"><i class="glyphicon glyphicon-book"></i>  {{ book.title }}</h4>
+                        <p class="card-text">{{ book.description }}</p>
+                      </div>
+                  {% if current_user.id == book.user_id %}
+                        <button class="btn btn-xs btn-info">
+                                   <a href="{{ url_for('home.borrow_books', id=book.id, user_id = current_user.id) }}" style="color: white;">
+                                    <i class="fa fa-thumbs"></i> Return Book
+                                   </a>
+                        </button>
+                    {% endif %}
+                    </div>
+                  </div>
+                  <!-- check if user is admin -->
+              {% endfor %}
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3 class="lead"><i class="fa fa-space-shuttle"></i> You have not borrowed any books. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+      
+        </div>
+        </div>
+        </div>
+{% endblock %}

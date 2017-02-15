@@ -62,11 +62,23 @@ class Book(db.Model):
 	# created_by = db.Column(db.Integer, db.ForeignKey('users.id'), default=1)
 	# users = db.relationship('User', backref='book', lazy='dynamic')
 
-	def __repr__():
-		return 'Book: {}'.format(self.book_title)
+	def __repr__(self):
+		return 'Book: {}'.format(self.title, self.description)
 
 	def load_book():
 		return Book.query.get(int(book_id))
+
+class UserBook(db.Model):
+	'''
+		 User database relational table - How many books a user haas
+
+	'''
+	__tablename__ = 'user_books'
+
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
+
 
 
 			

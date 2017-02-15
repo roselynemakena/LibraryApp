@@ -13,9 +13,14 @@
                 <div class="intro-message">
                     <h3> Welcome, Dashboard</h2>
                           <ul class="nav nav-pills  ">
-                              <!-- <li role="presentation" class="active"><a href="{{url_for('home.allbooks')}}">All Books</a></li> -->
-                              <li><a href="{{ url_for('admin.list_books') }}">Books</a></li>
-                              <li role="presentation"><a href="#">Borrowed Books</a></li>
+                              <li><a class="btn btn-default" href="{{ url_for('admin.list_books') }}">Books</a></li>
+                              <li role="presentation">
+                                 <form action="{{url_for('home.borrow_books')}}" method="POST">
+                                   <input type="hidden" name="book_id" value="0">
+                                   <input type="submit" name="" value="Borrowed Books" class="btn btn-default">
+                                     
+                                  </form>
+                              </li>
                                 <ul class="nav nav-pills  pull-right">
                                 <li role="presentation"><a href="#">Account Settings</a></li>
                             </ul>

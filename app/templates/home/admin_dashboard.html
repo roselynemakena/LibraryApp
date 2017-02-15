@@ -13,9 +13,9 @@
                 <div class="card text-center">
                   <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
-                    <li> <a href="{{ url_for('admin.add_book') }}" class="btn btn-default btn-lg">Add Book <i class="fa fa-plus"></i></a>
+                    <li class="pull-right" style="margin-right: 10%;"> <a href="{{ url_for('admin.add_book') }}" class="btn btn-default btn-lg">Add Book <i class="fa fa-plus"></i></a></li>
                       <li class="nav-item">
-                        <a class="nav-link active" href="#">Borrowed Books</a>
+                        <a class="nav-link active" href="{{url_for('admin.borrowed_books')}}">Borrowed Books</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="/admin/books">All Books</a>
@@ -26,11 +26,28 @@
                     </ul>
                   </div>
                   <div class="card-block">
-                    <h4 class="card-title">Special title treatment</h4>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h2 class="card-title">Change Stuff about the Library here!</h2>
+                    <p class="card-text">Access the quick links below to start administration.</p>
+      
                   </div>
-                </div>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <hr style="margin-bottom: 20px;">
+
+                             <div class="col-md-12">
+                    <div class="col-md-3">
+                     <a href="{{ url_for('admin.list_books') }}" class="btn btn-primary dash-btn">All Books</a>
+                    </div>
+                      <div class="col-md-3">
+                     <a href="{{url_for('admin.borrowed_books')}}" class="btn btn-success dash-btn">Borrowed Books</a>
+                    </div>
+                      <div class="col-md-3">
+                     <a href="#" class="btn btn-primary dash-btn">Returned Books</a>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>
