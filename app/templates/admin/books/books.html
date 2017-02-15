@@ -1,0 +1,45 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Bookss{% endblock %}
+{% block body %}
+  
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Books</h1>
+        {% if books %}
+          <div class="container">
+              {% for book in books %}
+                  <div class="card-deck">
+                    <div class="card col-md-3 card-f">
+                      <div class="card-block">
+                        <h4 class="card-title">{{ book.title }}</h4>
+                        <p class="card-text">{{ book.description }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-muted" class="btn btn-xs">
+                               <a href="{{ url_for('admin.edit_book', id=book.id) }}">
+                                 <i class="fa fa-pencil"></i> Edit 
+                              </a>
+                        </small>
+                        <small class="text-muted" class="btn btn-xs">
+                                   <a href="{{ url_for('admin.delete_book', id=book.id) }}">
+                                    <i class="fa fa-trash"></i> Delete 
+                                   </a>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- check if user is admin -->
+              {% endfor %}
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3 class="lead"> No Books have been added. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+      
+        </div>
+        </div>
+        </div>
+{% endblock %}

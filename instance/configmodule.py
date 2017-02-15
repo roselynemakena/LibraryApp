@@ -4,7 +4,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEBUG = False
-    DATABASE_URI = 'mysql://user@localhost/foo'
+    DATABASE_URI = 'postgres://user@localhost/foo'
 
 class DevelopmentConfig(Config):
     DEBUG = True

@@ -41,14 +41,17 @@ def login():
 
 		if user is not None and user.verify_password(form.password.data):
 			login_user(user)
-
-			return redirect(url_for('home.dashboard'))
+			if user.is_admin:
+				return redirect(url_for('home.admin_dashboard'))
+			else:
+				return redirect(url_for('home.dashboard'))
 		else:
 			flash("Wrong Password yo!")
 	#if user does not exist on database
 	return render_template('auth/login.html', form=form, title="Login")
 
 @auth.route('/logout')
+@login_required
 def logout():
 	logout_user()
 

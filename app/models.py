@@ -15,8 +15,18 @@ class User(UserMixin, db.Model):
 	email = db.Column(db.String(50),index=True, unique=True)
 	username = db.Column(db.String(50),index=True, unique=True)
 	password = db.Column(db.String(128))
+	password_hash = db.Column(db.String(128))
 	is_admin = db.Column(db.Boolean, default=False)
 
+
+	@property
+	def password():
+		'''
+		prevent password from being accessed
+		'''	
+		raiseAttributeError('Password is not readable!')
+
+	@password.setter
 	def password(self, password):
 		'''
 			make password hashed
@@ -24,7 +34,7 @@ class User(UserMixin, db.Model):
 
 		self.password_hash = generate_password_hash(password)
 
-	def verify_password():
+	def verify_password(self, password):
 		'''
 			check passwords if matching
 		'''
@@ -36,7 +46,7 @@ class User(UserMixin, db.Model):
 
 
 	@lm.user_loader
-	def load_user():
+	def load_user(user_id):
 		return User.query.get(int(user_id))
 
 
@@ -47,13 +57,16 @@ class Book(db.Model):
 	__tablename__ = 'books'
 
 	id = db.Column(db.Integer, primary_key=True)
-	book_title = db.Column(db.String(100))
-	book_description = db.Column(db.String(500))
-	created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+	title = db.Column(db.String(100))
+	description = db.Column(db.String(500))
+	# created_by = db.Column(db.Integer, db.ForeignKey('users.id'), default=1)
 	# users = db.relationship('User', backref='book', lazy='dynamic')
 
 	def __repr__():
 		return 'Book: {}'.format(self.book_title)
+
+	def load_book():
+		return Book.query.get(int(book_id))
 
 
 			

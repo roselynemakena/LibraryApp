@@ -1,18 +1,26 @@
-{% extends "base.html"%}
 
-{% block title%}
-
-
-{% endblock title %}
-
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
 {% block body %}
+
+
+<div class="container margin-top-50">
+</div>
 <div class="intro-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
-                    <h1>Project Dream Team</h1>
-                    <h3>The best company in the world!</h3>
+                    <h3> Welcome, Dashboard</h2>
+                          <ul class="nav nav-pills  ">
+                              <!-- <li role="presentation" class="active"><a href="{{url_for('home.allbooks')}}">All Books</a></li> -->
+                              <li><a href="{{ url_for('admin.list_books') }}">Books</a></li>
+                              <li role="presentation"><a href="#">Borrowed Books</a></li>
+                                <ul class="nav nav-pills  pull-right">
+                                <li role="presentation"><a href="#">Account Settings</a></li>
+                            </ul>
+                            </ul>
+                          
                     <hr class="intro-divider">
                     </ul>
                 </div>
@@ -20,5 +28,4 @@
         </div>
     </div>
 </div>
-
-{% endblock body%}
+{% endblock %}
