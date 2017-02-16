@@ -62,7 +62,7 @@ def borrow_books():
 				#go ahead and allow user to borrow book
 				db.session.add(user_book)
 				db.session.commit()
-				flash("Successfully Borrowed book, wait for approval from admin")
+				flash("Successfully Borrowed book, wait for approval from admin",'success')
 
 		except:
 			flash("You have borrowed this book already!")

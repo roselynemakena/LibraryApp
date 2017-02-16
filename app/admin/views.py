@@ -47,7 +47,7 @@ def add_book():
 			try:
 				db.session.add(book)
 				db.session.commit()
-				flash("Successfully added Book")
+				flash("Successfully added Book",'success')
 			except:
 				flash("Book already added")
 
@@ -72,7 +72,7 @@ def edit_book(id):
 
 		db.session.commit()
 
-		flash("Book edited successfully!!")
+		flash("Book edited successfully!!",'success')
 
 		return redirect(url_for('admin.list_books'))
 
@@ -92,7 +92,7 @@ def delete_book(id):
     book = Book.query.get_or_404(id)
     db.session.delete(book)
     db.session.commit()
-    flash('You have successfully deleted the book!.')
+    flash('You have successfully deleted the book!.','error')
 
     # redirect to the departments page
     return redirect(url_for('admin.list_books'))
@@ -152,9 +152,6 @@ def get_user_borrowed_books(user_id):
 	return user_books
 def get_user_borrowed_book(user_id, book_id):	
 	user_books = UserBook.query.filter(user_id == user_id, book_id == book_id).first()
-	print("	*******************************")
-	print(user_books.title)
-	# raise
 	return user_books
 def get_dates(user_id, book_id):
 	return_date = UserBook.query.get(user_id == user_id, book_id == book_id)
