@@ -15,13 +15,7 @@
                     <h3> Welcome, Dashboard</h2>
                           <ul class="nav nav-pills  ">
                               <li><a class="btn btn-default" href="{{ url_for('admin.list_books') }}">Browse Books</a></li>
-                              <li>  
-                                 <form action="{{url_for('home.borrow_books')}}" method="POST">
-                                   <input type="hidden" name="book_id" value="0">
-                                   <input type="submit" name="" value="Borrowed Books" class="btn btn-default" style="padding: 10px;">
-                                     
-                                  </form>
-                              </li>
+                              <li><a  class="btn btn-default" href="{{ url_for('home.list_borrowed_books') }}">Borrowed Books</a></li>
                                 <ul class="nav nav-pills  pull-right">
                                 <li role="presentation"><a href="#">Account Settings</a></li>
                             </ul>
@@ -33,41 +27,30 @@
             </div>
         </div>
         <div style="position: relative;" class="container">
-            <img src="{{ url_for('static', filename='img/books.jpg') }}" width="100%">
+            <img src="{{ url_for('static', filename='img/books.jpg') }}" width="100%" style="position:absolute; left:0px; top:0px;  ">
 
            <h2 align="center"> Welcome to Super lib! :-)</h2>
-            <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
-            Number of Books
-              <div class="card-block">
-              <h4 class="card-title">Sun Gone</h4>
+            <div align="center" class="card card-inverse card-danger col-md-12 " style="width: 100%;padding: 30px;">
+              <div class="card-block" style="background: rgba(0,0,0,0.6); width: 100%;display: inline-block;">
+              <h1 class="card-title" style="color:white;font-weight: bolder;font-size: 44px;"><i class="glyphicon glyphicon-book"></i> What book do you want to read..</h1>
               <p class="card-text">
-              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
+              <i style="font-size:100px; color: green;"></i>
               </p>
              </div>
 
               </div>
 
-                       <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
-            Number of Books
-              <div class="card-block">
-              <h4 class="card-title">Sun Gone</h4>
+           </div>
+           <div class="container">
+             <div align="center" class="card card-inverse card-danger col-md-12 " style="width: 100%;padding: 30px;">
+              <div class="card-block" style="background: rgba(255,234,0,0.6); width: 30%;display: inline-block;">
+              <h1 class="card-title" style="color:white;"><a class="white" href="{{ url_for('admin.list_books') }}">Browse Books</a></h1>
               <p class="card-text">
-              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
+              <i style="font-size:100px; color: green;"></i>
               </p>
              </div>
 
-              </div>
 
-                       <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
-            Number of Books
-              <div class="card-block">
-              <h4 class="card-title">Sun Gone</h4>
-              <p class="card-text">
-              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
-              </p>
-             </div>
-
-              </div>
 
            </div>
 

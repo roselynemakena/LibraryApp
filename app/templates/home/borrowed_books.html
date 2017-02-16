@@ -14,22 +14,23 @@
                     {% else %}
 
                  <button class="btn btn-default"><a href="{{ url_for('home.dashboard') }}"><< Return to Dashboard</a></li></button>
+                 <button class="btn btn-default"><a href="{{ url_for('admin.list_books') }}"><< Browse Books</a></li></button>
                   {% endif %}
           {% endif %}
         </div>
         {% if books %}
           <div class="container">
               {% for book in books %}
-                  <div class="card-deck">
-                    <div class="card col-md-3 card-f">
+                  <div class="card-deck col-md-4" style="padding: 10px;">
+                    <div class="card card-f">
                       <div class="card-block">
                         <h4 class="card-title"><i class="glyphicon glyphicon-book"></i>  {{ book.title }}</h4>
-                        <p class="card-text">{{ book.description }}</p>
+                        <p class="card-text" style="min-height: 60px;">{{ book.description }}</p>
                               <hr>
-                              <div class="col-">
-                        <small class="text-muted col-md-6 no-padding"><i class="glyphicon glyphicon-time" style="color:green;"></i> Date Borrowed: {{get_dates(current_user.id, book.id).borrow_date}}<hr></small>
+                       <div class="col-12" style="display: inline-block;">
+                        <small class="text-muted col-xs-6 no-padding"><i class="glyphicon glyphicon-time" style="color:green;"></i> Date Borrowed: {{get_dates(current_user.id, book.id).borrow_date}}<hr></small>
 
-                        <small class="text-muted col-md-6  no-padding"><i class="glyphicon glyphicon-time" style="color: red;"></i> Date Due: {{get_dates(current_user.id, book.id).return_date}}</small>
+                        <small class="text-muted col-xs-6  no-padding"><i class="glyphicon glyphicon-time" style="color: red;"></i> Date Due: {{get_dates(current_user.id, book.id).return_date}}</small>
                         </div>
                       </div>
                   {% if current_user.id == book.user_id %}
@@ -46,7 +47,7 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3 class="lead"><i class="fa fa-space-shuttle"></i> You have not borrowed any books. </h3>
+            <h3 class="lead"><i class="glyphicon` glyphicon-space-shuttle"></i> You have not borrowed any books. </h3>
             <hr class="intro-divider">
         {% endif %}
       

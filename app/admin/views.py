@@ -118,7 +118,7 @@ def user_books():
 
 	user_books = get_user_borrowed_books(user_id)
 
-	return render_template('/admin/books/user_books.html', user =user, books = user_books, title="User Borrwed Books")
+	return render_template('/admin/books/user_books.html',get_dates = get_dates,  user =user, books = user_books, title="User Borrwed Books")
 
 @admin.route('/collect_book', methods=['GET', 'POST'])
 @login_required
@@ -130,12 +130,13 @@ def collect_book():
 	user_id = request.form['user_id']
 	book_id = request.form['book_id']
 	user_book = get_user_borrowed_book(user_id, book_id)
-	try:
-		db.session.delete(user_book)
-		db.session.commit()
-		flash("you have collected the book!")
-	except:
-		flash("Error in collecting the book!")
+	if user_book:
+		try:
+			db.session.delete(user_book)
+			db.session.commit()
+			flash("you have collected the book!", 'success')
+		except:
+			flash("Error in collecting the book!", 'error')
 
 	return render_template('/admin/books/borrowed_books.html',users=users, title="User Borrwed Books")
 
@@ -151,11 +152,11 @@ def get_user_borrowed_books(user_id):
 	return user_books
 def get_user_borrowed_book(user_id, book_id):	
 	user_books = UserBook.query.filter(user_id == user_id, book_id == book_id).first()
-	# print("	")
-	# print(user_books)
+	print("	*******************************")
+	print(user_books.title)
 	# raise
 	return user_books
-def get_return_date(user_id, book_id):
+def get_dates(user_id, book_id):
 	return_date = UserBook.query.get(user_id == user_id, book_id == book_id)
 	return return_date
 

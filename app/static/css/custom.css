@@ -8,13 +8,28 @@
 .card-f {
 	/*background-color: black !important;*/
 	background-color: aliceblue !important;
+	padding: 20px;
     margin: 25px !important;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 
 }
+.bb {
+    background-color: #eaeaea;
+    border: 1px solid rgba(0,0,0,.125);
+    overflow: hidden;
+	}
+.white {
+	color: white !important;
+}
+.fade {
+    border-radius: 50%;
+    opacity: .5;
+}
+.margin-top-half {
+	margin-top: 50% !important;
+}
 .card {
-   position: absolute;
   
 }
 .no-padding {

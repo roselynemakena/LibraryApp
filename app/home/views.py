@@ -38,29 +38,34 @@ def books():
 @home.route('/borrow_book', methods=['POST'])
 def borrow_books():
 	# Save borrowed book
-	add_user_book = True
 	user_id = current_user.id
+	books = get_user_borrowed_books(user_id)
+
 	borrow_date = timestamp = datetime.now()
 	return_date = borrow_date + timedelta(10)
 	book_id = request.form['book_id']
-	books = get_user_borrowed_books(user_id)
-	no_of_books = books.count()
-	return_date = return_date.strftime("%d/%m/%y %H:%M")
-	borrow_date = borrow_date.strftime("%d/%m/%y %H:%M")
 
-	user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
-	try:
-		if book_is_borrowed(user_id, book_id):
-			#check if owner has book already
-			flash("You have already Borrowed this Book, Please return it first :)")
-		else:		
-			#go ahead and allow user to borrow book
-			db.session.add(user_book)
-			db.session.commit()
-			flash("Successfully Borrowed book, wait for approval from admin")
+	if book_id:
+		add_user_book = True
 
-	except:
-		flash("You have borrowed this book already!")
+		books = get_user_borrowed_books(user_id)
+		no_of_books = books.count()
+		return_date = return_date.strftime("%d/%m/%y %H:%M")
+		borrow_date = borrow_date.strftime("%d/%m/%y %H:%M")
+
+		user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
+		try:
+			if book_is_borrowed(user_id, book_id):
+				#check if owner has book already
+				flash("You have already Borrowed this Book, Please return it first :)")
+			else:		
+				#go ahead and allow user to borrow book
+				db.session.add(user_book)
+				db.session.commit()
+				flash("Successfully Borrowed book, wait for approval from admin")
+
+		except:
+			flash("You have borrowed this book already!")
 		
 
 	return render_template('home/borrowed_books.html', get_dates = get_dates, books = books, title="Borrow Books")
@@ -71,8 +76,8 @@ def list_borrowed_books():
 	user_id = current_user.id
 
 	books = UserBook.query.get(user_id)
-	print(books)
-	print("*************************")
+	if not books:
+		books = None
 
 	return render_template('home/borrowed_books.html',  books = books, title="Borrowed Books")
 	

@@ -20,12 +20,11 @@
         {% if books %}
           <div class="container">
               {% for book in books %}
-                  <div class="card-deck">
-                    <div class="card col-md-3 card-f">
+                  <div class="card-deck col-md-4">
+                    <div class="card col-md-12 card-f">
                       <div class="card-block">
                         <h4 class="card-title">{{ book.title }}</h4>
                         <p class="card-text">{{ book.description }}</p>
-                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Date Due: {{get_return_date(1)}} </small>
                       </div>
                   {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
@@ -33,9 +32,7 @@
                                  <form action="{{url_for('admin.collect_book')}}" method="POST">
                                    <input type="hidden" name="book_id" value="{{book.id}}">
                                    <input type="hidden" name="user_id" value="{{current_user.id}}">
-                                      <i class="glyphicon glyphicon-flash"></i>
-
-                                   <input type="submit" name="" value="Collect Book Book" class="btn btn-xs btn-info">
+                                      <i class="glyphicon glyphicon-flash"></i><input type="submit" value="Collect Book" class="btn btn-xs btn-info">
                                      
                                   </form> </a>
                       </div>

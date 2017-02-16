@@ -18,16 +18,23 @@ Homepage
                     </ul>
                 </div>
                 <div class="jumbotron" style="">
-                  <h1 class="display-3">Welcome to Super Library!</h1>
-                      <p class="lead"> Register your books, manage them and charge those who have not reurned them! <i class="glyphicon glyphicon-star"></i></p>
-                      <hr class="my-4">
-                      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                      <div class="pull-right col-md-6 col-md-offset-6">
+            <img src="{{ url_for('static', filename='img/case.jpg') }}" width="100%" style="position:absolute; left:0px; top:0px;  ">
+
+            <div align="center" class="card card-inverse card-danger col-md-12 " style="width: 100%;padding: 30px;">
+              <div class="card-block" style="background: rgba(0,0,0,0.6); width: 100%;display: inline-block;">
+              <h1 class="card-title" style="color:white;font-weight: bolder;font-size: 44px;"><i class="glyphicon glyphicon-book"></i> Read the books you want to read..</h1>
+              <p class="card-text">
+              <i style="font-size:100px; color: aliceblue;" class="glyphicon glyphicon-star"></i>
+              </p>
+             </div>
+
+              </div>
+                      <div class="pull-right col-md-12" style="text-align: right; margin-top: 10%; margin-left: 60%">
                       <div class="lead col-md-3" >
-                        <a class="btn btn-sm btn-success btn-lg" href="/admin" role="button">Admin</a>
+                        <a class="btn btn-lg btn-success btn-lg" href="{{url_for('auth.login')}}" role="button">Admin</a>
                       </div>
                         <div class="lead col-md-3">
-                        <a class="btn btn-sm btn-info btn-lg" href="/login" role="button">User</a>
+                        <a class="btn btn-lg btn-default btn-lg" href="{{url_for('auth.login')}}" role="button">User</a>
                       </div>
                       </div>
                     
