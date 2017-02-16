@@ -79,8 +79,6 @@ class UserBook(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
-	borrow_date = db.Column(db.DateTime,onupdate=datetime.datetime.now)
-	return_date = db.Column(db.DateTime,onupdate=datetime.datetime.now)
 
 
 
