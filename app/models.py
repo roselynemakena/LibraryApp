@@ -59,6 +59,7 @@ class Book(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(100))
 	description = db.Column(db.String(500))
+	quantity = db.Column(db.Integer, default=1)
 	# created_by = db.Column(db.Integer, db.ForeignKey('users.id'), default=1)
 	# users = db.relationship('User', backref='book', lazy='dynamic')
 
@@ -78,8 +79,8 @@ class UserBook(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
-	borrow_date = Column(DateTime, default=datetime.datetime.utcnow)
-	return_date = Column(DateTime)
+	borrow_date = db.Column(db.DateTime)
+	return_date = db.Column(db.DateTime)
 
 
 

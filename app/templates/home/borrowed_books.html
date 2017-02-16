@@ -7,6 +7,16 @@
         {{ utils.flashed_messages() }}
         <br/>
         <h1 style="text-align:center;">Books you currently have</h1>
+                <div class=" container">
+          {% if current_user.is_authenticated %}
+                  {% if current_user.is_admin %}
+                      <button class="btn btn-default"><a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></button>
+                    {% else %}
+
+                 <button class="btn btn-default"><a href="{{ url_for('home.dashboard') }}"><< Return to Dashboard</a></li></button>
+                  {% endif %}
+          {% endif %}
+        </div>
         {% if books %}
           <div class="container">
               {% for book in books %}

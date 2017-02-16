@@ -7,13 +7,14 @@
         {{ utils.flashed_messages() }}
         <br/>
         <h1 style="text-align:center;">Books</h1>
-        <div class=" container">
+        <div class="container">
           {% if current_user.is_authenticated %}
                   {% if current_user.is_admin %}
-                      <button class="btn btn-default"><a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></button>
+                      <button class="btn btn-default"><a href="{{ url_for('home.admin_dashboard') }}"><< Admin Dashboard</a></button>
+                      <button class="btn btn-default pull-right" style="margin-right: 20%"><a href="{{ url_for('admin.add_book') }}">Add Book </a></button>
                     {% else %}
 
-                 <button class="btn btn-default"><a href="{{ url_for('home.dashboard') }}"><< Return to Dashboard</a></li></button>
+                 <button class="btn btn-default"><a href="{{ url_for('home.dashboard') }}"><< Return to Dashboard</a></button>
                   {% endif %}
           {% endif %}
         </div>
@@ -34,17 +35,20 @@
                                  <i class="fa fa-pencil"></i> Edit 
                               </a>
                         </button>
-                        <button class="btn btn-xs btn-success">
-                                   <a href="{{ url_for('admin.delete_book', id=book.id) }}">
-                                    <i class="fa fa-trash"></i> Delete 
+                        <button class="btn btn-xs btn-danger">
+                                   <a style="color: white;"  href="{{ url_for('admin.delete_book', id=book.id) }}">
+                                    <i class="glyphicon glyphicon-trash"></i> Delete 
                                    </a>
                         </button>
+                           <label class="pull-right">
+                                    <small>Total: </small><button class="btn btn-xs btn-default"> {{book.quantity}}</button>
+                        </label>
                       </div>
                       {% else %}
                                  <form action="{{url_for('home.borrow_books')}}" method="POST">
                                    <input type="hidden" name="book_id" value="{{book.id}}">
                                    <input type="hidden" name="user_id" value="{{current_user.id}}">
-                                   <input type="submit" name="" value="Borroe Book" class="btn btn-success">
+                                   <input type="submit" name="" value="Borrow Book" class="btn btn-success">
                                      
                                   </form>
                     {% endif %}

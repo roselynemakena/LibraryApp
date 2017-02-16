@@ -6,6 +6,7 @@
 
 <div class="container margin-top-50">
 </div>
+{% if current_user %}
 <div class="intro-header">
     <div class="container">
         <div class="row">
@@ -13,11 +14,11 @@
                 <div class="intro-message">
                     <h3> Welcome, Dashboard</h2>
                           <ul class="nav nav-pills  ">
-                              <li><a class="btn btn-default" href="{{ url_for('admin.list_books') }}">Books</a></li>
-                              <li role="presentation">
+                              <li><a class="btn btn-default" href="{{ url_for('admin.list_books') }}">Browse Books</a></li>
+                              <li>  
                                  <form action="{{url_for('home.borrow_books')}}" method="POST">
                                    <input type="hidden" name="book_id" value="0">
-                                   <input type="submit" name="" value="Borrowed Books" class="btn btn-default">
+                                   <input type="submit" name="" value="Borrowed Books" class="btn btn-default" style="padding: 10px;">
                                      
                                   </form>
                               </li>
@@ -31,6 +32,47 @@
                 </div>
             </div>
         </div>
+        <div style="position: relative;" class="container">
+            <img src="{{ url_for('static', filename='img/books.jpg') }}" width="100%">
+
+           <h2 align="center"> Welcome to Super lib! :-)</h2>
+            <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
+            Number of Books
+              <div class="card-block">
+              <h4 class="card-title">Sun Gone</h4>
+              <p class="card-text">
+              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
+              </p>
+             </div>
+
+              </div>
+
+                       <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
+            Number of Books
+              <div class="card-block">
+              <h4 class="card-title">Sun Gone</h4>
+              <p class="card-text">
+              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
+              </p>
+             </div>
+
+              </div>
+
+                       <div class="card card-inverse card-danger col-md-4" style="max-width: 20rem;">
+            Number of Books
+              <div class="card-block">
+              <h4 class="card-title">Sun Gone</h4>
+              <p class="card-text">
+              <i class="glyphicon glyphicon-star" style="font-size:100px;"></i>
+              </p>
+             </div>
+
+              </div>
+
+           </div>
+
+            {{no_of_books}}
     </div>
 </div>
+{% endif    %}
 {% endblock %}

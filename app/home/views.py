@@ -41,20 +41,13 @@ def borrow_books():
 	add_user_book = True
 	user_id = current_user.id
 	borrow_date = timestamp = datetime.now()
-	return_date = date_borrowed + timedelta(10)
+	return_date = borrow_date + timedelta(10)
 	book_id = request.form['book_id']
 	books = get_user_borrowed_books(user_id)
 	no_of_books = books.count()
+	return_date = return_date.strftime("%d/%m/%y %H:%M")
+	borrow_date = borrow_date.strftime("%d/%m/%y %H:%M")
 
-	if book_id:
-		return render_template('home/borrowed_books.html', books = books, title="Borrow Books")
-
-
-	for x in books:
-		print("**********************")
-		print(Book.query.get(2))
-	# raise
-	# user_book = UserBook(book_id = request.args.get('id') ,user_id = request.args.get('user_id'))
 	user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
 	try:
 		if book_is_borrowed(user_id, book_id):
@@ -70,7 +63,7 @@ def borrow_books():
 		flash("You have borrowed this book already!")
 		
 
-	return render_template('home/borrowed_books.html', books = books, title="Borrow Books")
+	return render_template('home/borrowed_books.html', get_dates = get_dates, books = books, title="Borrow Books")
 
 @home.route('/borrowed_books', methods = ['GET', 'POST'])
 @login_required
@@ -90,7 +83,13 @@ def book_is_borrowed(user_id, book_id):
 
 def get_user_borrowed_books(user_id):
 	# return UserBook.query.join(Book, UserBook.books_id==books.id).filter(UserBook.user_id==request.form['user_id'])
-	return Book.query.join(UserBook, Book.id==UserBook.book_id).filter(UserBook.user_id==request.form['user_id'])
+	return Book.query.join(UserBook, Book.id==UserBook.book_id).filter(UserBook.user_id==user_id)
+
+def get_dates(user_id, book_id):
+	dates = UserBook.query.filter(user_id == user_id, book_id == book_id).first()
+	# raise
+	return dates
+
 	
 
 	

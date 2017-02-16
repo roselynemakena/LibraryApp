@@ -1,5 +1,6 @@
 from flask import abort, flash, redirect, render_template, url_for, request
 from flask_login import current_user, login_required
+from sqlalchemy.orm import joinedload
 
 from . import admin
 from . forms import BookForm
@@ -40,7 +41,8 @@ def add_book():
 
 		if form.validate_on_submit():
 			book = Book(title = form.title.data,
-						description = form.description.data
+						description = form.description.data,
+						quantity = form.quantity.data
 						)
 			try:
 				db.session.add(book)
@@ -103,7 +105,6 @@ def borrowed_books():
 	check_admin()
 
 	users = get_all_users()
-	print(users)
 
 	return render_template('/admin/books/borrowed_books.html', users = users, title="Borrowed books")
 
@@ -117,10 +118,26 @@ def user_books():
 
 	user_books = get_user_borrowed_books(user_id)
 
-	print("*******************************")
-	print(user_books)
-
 	return render_template('/admin/books/user_books.html', user =user, books = user_books, title="User Borrwed Books")
+
+@admin.route('/collect_book', methods=['GET', 'POST'])
+@login_required
+
+def collect_book():
+	check_admin()
+	users = get_all_users()
+
+	user_id = request.form['user_id']
+	book_id = request.form['book_id']
+	user_book = get_user_borrowed_book(user_id, book_id)
+	try:
+		db.session.delete(user_book)
+		db.session.commit()
+		flash("you have collected the book!")
+	except:
+		flash("Error in collecting the book!")
+
+	return render_template('/admin/books/borrowed_books.html',users=users, title="User Borrwed Books")
 
 
 def get_all_users():
@@ -128,8 +145,19 @@ def get_all_users():
 	return users
 
 def get_user_borrowed_books(user_id):
-	user_books = Book.query.join(UserBook, Book.id == UserBook.book_id).filter(UserBook.user_id == user_id)
+	# parent =	 aliased(UserBook)
+	user_books = Book.query.join(UserBook, Book.id == UserBook.book_id).filter(UserBook.user_id == user_id).all()
+
 	return user_books
+def get_user_borrowed_book(user_id, book_id):	
+	user_books = UserBook.query.filter(user_id == user_id, book_id == book_id).first()
+	# print("	")
+	# print(user_books)
+	# raise
+	return user_books
+def get_return_date(user_id, book_id):
+	return_date = UserBook.query.get(user_id == user_id, book_id == book_id)
+	return return_date
 
 
 
