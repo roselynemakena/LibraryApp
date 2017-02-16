@@ -50,8 +50,8 @@ def borrow_books():
 
 		books = get_user_borrowed_books(user_id)
 		no_of_books = books.count()
-		return_date = return_date.strftime("%d/%m/%y %H:%M")
-		borrow_date = borrow_date.strftime("%d/%m/%y %H:%M")
+		return_date = return_date.strftime("%d/%m/%y")
+		borrow_date = borrow_date.strftime("%d/%m/%y")
 
 		user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
 		try:
