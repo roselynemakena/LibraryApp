@@ -25,17 +25,19 @@
                       <div class="card-block">
                         <h4 class="card-title">{{ book.title }}</h4>
                         <p class="card-text">{{ book.description }}</p>
-                        <hr>
-                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Date Due: </small>
+                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Date Due: {{get_return_date(1)}} </small>
                       </div>
                   {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
                       <div class="card-footer">
-                        <button class="btn btn-xs btn-info">
-                                   <a href="{{ url_for('admin.delete_book', id=book.id) }}">
-                                    <i class="glyphicon glyphicon-flash"></i> Collect Book
-                                   </a>
-                        </button>
+                                 <form action="{{url_for('admin.collect_book')}}" method="POST">
+                                   <input type="hidden" name="book_id" value="{{book.id}}">
+                                   <input type="hidden" name="user_id" value="{{current_user.id}}">
+                                      <i class="glyphicon glyphicon-flash"></i>
+
+                                   <input type="submit" name="" value="Collect Book Book" class="btn btn-xs btn-info">
+                                     
+                                  </form> </a>
                       </div>
                       {% else %}
                                  <form action="{{url_for('home.borrow_books')}}" method="POST">

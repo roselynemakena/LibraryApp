@@ -15,6 +15,12 @@
                       <div class="card-block">
                         <h4 class="card-title"><i class="glyphicon glyphicon-book"></i>  {{ book.title }}</h4>
                         <p class="card-text">{{ book.description }}</p>
+                              <hr>
+                              <div class="col-">
+                        <small class="text-muted col-md-6 no-padding"><i class="glyphicon glyphicon-time" style="color:green;"></i> Date Borrowed: {{get_dates(current_user.id, book.id).borrow_date}}<hr></small>
+
+                        <small class="text-muted col-md-6  no-padding"><i class="glyphicon glyphicon-time" style="color: red;"></i> Date Due: {{get_dates(current_user.id, book.id).return_date}}</small>
+                        </div>
                       </div>
                   {% if current_user.id == book.user_id %}
                         <button class="btn btn-xs btn-info">
