@@ -4,6 +4,7 @@ from sqlalchemy import and_
 from . import home
 from ..models import UserBook, Book
 from .. import db
+from datetime import datetime,timedelta
 
 
 
@@ -39,6 +40,8 @@ def borrow_books():
 	# Save borrowed book
 	add_user_book = True
 	user_id = current_user.id
+	borrow_date = timestamp = datetime.now()
+	return_date = date_borrowed + timedelta(10)
 	book_id = request.form['book_id']
 	books = get_user_borrowed_books(user_id)
 	no_of_books = books.count()
@@ -52,7 +55,7 @@ def borrow_books():
 		print(Book.query.get(2))
 	# raise
 	# user_book = UserBook(book_id = request.args.get('id') ,user_id = request.args.get('user_id'))
-	user_book = UserBook(user_id = user_id, book_id = book_id)
+	user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
 	try:
 		if book_is_borrowed(user_id, book_id):
 			#check if owner has book already
