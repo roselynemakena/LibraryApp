@@ -50,10 +50,10 @@ def borrow_books():
 
 		books = get_user_borrowed_books(user_id)
 		no_of_books = books.count()
-		return_date = return_date.strftime("%d/%m/%y")
-		borrow_date = borrow_date.strftime("%d/%m/%y")
+		return_date = return_date.strftime("%d-%m-%y")
+		borrow_date = borrow_date.strftime("%d-%m-%y")
 
-		user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = borrow_date, return_date = return_date)
+		user_book = UserBook(user_id = user_id, book_id = book_id, borrow_date = "", return_date = "")
 		try:
 			if book_is_borrowed(user_id, book_id):
 				#check if owner has book already
