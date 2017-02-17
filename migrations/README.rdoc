@@ -1,0 +1,38 @@
+== About
+
+A library App that allows an librarian(admin) to manage books in the entire library.
+
+Things you may want to cover:
+
+==Major Dependencies versions
+
+Flask==0.12
+Python
+
+
+== Configuration
+*git clone https://github.com/roselynemakena/LibraryApp.git
+*pip install requirements.txt
+*export FLASK_APP=run.py
+
+==Running the app
+*In your favorite terminal
+*cd into app
+*flask run
+
+
+
+== Features
+
+* Authentication - Admin and user.
+* Track borrowed books
+* Allow user to return books
+
+==Features in pipeline
+* Penalize users who have not returned book on time
+* Add book categories
+
+
+== Deployment on Heroku
+https://library-app-makena.herokuapp.com/
+
